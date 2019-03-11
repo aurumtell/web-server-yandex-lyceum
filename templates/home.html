@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="#">
-    <img src="bird.jpg" alt="logo" style="width:40px;">
+    <img src="{{ url_for('static', filename='twitter.jpg') }}" alt="logo" style="width:40px;"/>
   </a>
 
   <!-- Links -->
@@ -31,7 +31,7 @@
   </ul>
     <form class="form-inline" action="/action_page.php">
     <input class="form-control mr-sm-2" type="text" placeholder="Search">
-    <button class="btn btn-success" type="suit ibmit">Search</button>
+    <button class="btn btn-success" type="submit">Search</button>
   </form>
 </nav>
 
