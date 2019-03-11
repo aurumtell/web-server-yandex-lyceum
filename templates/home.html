@@ -35,6 +35,54 @@
   </form>
 </nav>
 
+
+<div class="container mt-3">
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Add news
+  </button>
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add News</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+
+        <!-- Modal body -->
+
+
+          <form class="box" method="post" action="" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-group">
+               <label for="comment">Comment:</label>
+               <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                <!--<input type="text" id="comment" name="comment"/>-->
+             </div>
+
+              <div class="box__input">
+                <input class="box__file" type="file" name="uploadingfiles" id="file" data-multiple-caption="{count} files selected" multiple />
+                <button class="box__button" type="submit">Upload</button>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Add</button>
+              </div>
+            </div>
+          </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
 <div class="container-fluid">
   <h3>Brand / Logo</h3>
   <p>When using the .navbar-brand class on images, Bootstrap 4 will automatically style the image to fit the navbar.</p>

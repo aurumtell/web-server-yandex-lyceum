@@ -1,0 +1,26 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>{{title}}</title>
+    {% if "username" in session %}
+    <a class="navbar-brand" href="/logout">{{session['username']}}</a>
+    {% endif %}
+</head>
+  <body>
+    <h1>LOGIN</h1>
+    <!-- Begin page content -->
+    <a href="/add_news">Добавить новость</a>
+    {% for item in news %}
+        <div class="alert alert-dark" role="alert">
+            <h2>{{item[1]}}</h2>
+            <div>{{item[2]}}</div>
+            <a href="/delete_news/{{item[0]}}">Удалить новость</a>
+        </div>
+    {% endfor %}
+  </body>
+</html>
