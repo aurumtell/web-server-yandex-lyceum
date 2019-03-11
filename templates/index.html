@@ -1,0 +1,161 @@
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+                      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+                      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+                      <style>
+                      .modal-header, h4, .close {
+                        background-color: #5cb85c;
+                        color:white !important;
+                        text-align: center;
+                        font-size: 30px;
+                      }
+                      .modal-footer {
+                        background-color: #f9f9f9;
+                      }
+                      </style>
+                    </head>
+                    <body>
+
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <h2> Login </h2>
+                            <!-- Trigger the modal with a button -->
+                        </div>
+                        <div class="row justify-content-center">
+                            <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
+                        </div>
+
+
+
+
+
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header" style="padding:35px 50px;">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4><span class="glyphicon glyphicon-lock"></span>Login</h4>
+                            </div>
+                            <div class="modal-body" style="padding:40px 50px;">
+                              <form role="form">
+                                <div class="form-group">
+                                  <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
+                                  <input type="email" class="form-control" id="email" name= 'email' placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                  <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                                  <input type="password" class="form-control" id="password" name = 'passsword' placeholder="Enter password">
+                                </div>
+                                  <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Login</button>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+
+                              <p>Not a member? <button type="button" class="btn btn-default" id="myBtn1">Sign up</button></p>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                       <!-- Modal -->
+                      <div class="modal fade" id="myModal1" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header" style="padding:35px 50px;">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4><span class="glyphicon glyphicon-lock"></span>Sign up</h4>
+                            </div>
+                            <div class="modal-body" style="padding:40px 50px;">
+                              <form role="form">
+                                <div class="form-group">
+                                  <p>Please fill in this form to create an account.</p>
+                                  <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
+                                  <input type="email" class="form-control" id="email" name= 'email' placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                  <label for="password"><span class="glyphicon glyphicon-eye-open"></span>Password</label>
+                                  <input type="password" class="form-control" id="password" name = 'passsword' placeholder="Enter password">
+                                </div>
+                                  <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Sign up</button>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                       <!-- Modal -->
+                    </div>
+
+
+                    <script>
+                    $(document).ready(function(){
+                      $("#myBtn").click(function(){
+                        $("#myModal").modal();
+                      });
+                    });
+
+                    $(document).ready(function(){
+                      $("#myBtn1").click(function(){
+                        $("#myModal1").modal();
+                      });
+                    });
+                    </script>
+
+                    </body>
+                    </html>
+
+
+                              <!--<div class="modal">-->
+                                    <!--<div class="modal-backdrop"></div>-->
+
+                                    <!--<div class="modal-inner">-->
+                                        <!--<div class='modal-close'>-->
+                                            <!--<img src="images/close.svg">-->
+                                        <!--</div>-->
+                                        <!--<div class="modal-title">-->
+                                            <!--Войти в систему-->
+                                        <!--</div>-->
+
+                                        <!--<div class="modal-form">-->
+                                            <!--<form >-->
+                                                <!--<div class="form-field">-->
+                                                    <!--<input class='input' type="text"  placeholder="Введите email" id = 'email' name = 'email'>-->
+                                                    <!--<div  class="form-field&#45;&#45;errorText" ></div>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-field">-->
+                                                    <!--<input  class='input' type="password"  placeholder="Введите пароль" id = 'password' name = 'password'>-->
+                                                    <!--<div  class="form-field&#45;&#45;errorText" ></div>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-field">-->
+                                                    <!--<button type='submit' class='button success'>Войти</button>-->
+                                                <!--</div>-->
+                                                <!--<div class='modal-link'>-->
+                                                    <!--<button type='submit' class='button signup' href = '/signup'>Создать аккаунт</button>-->
+                                                <!--</div>-->
+                                            <!--</form>-->
+                                        <!--</div>-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<h1 class = 'title'>Sign up</h1>-->
+                                <!--<form method="post">-->
+                                    <!--<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите адрес почты" name="email">-->
+                                    <!--<input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">-->
+                                    <!--<button type="submit" class="btn btn-primary">Войти</button>-->
+                                    <!--<button type="submit" class="btn btn-primary" href = "/signup">Создать аккаунт</button>-->
+                                <!--</form>-->
