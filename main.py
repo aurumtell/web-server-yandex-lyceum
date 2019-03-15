@@ -40,6 +40,8 @@ class AddNewsForm(FlaskForm):
 def account():
     if request.method == 'GET':
         return render_template('account.html')
+    if request.method == 'POST':
+
 
 
 # @app.route('/add_news', methods=['GET', 'POST'])
