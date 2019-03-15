@@ -14,11 +14,15 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="#">
+
       <form method="get" action="/account">
           <button type="submit" class="btn btn-primary">
             <img src="{{ url_for('static', filename='twitter.jpg') }}"  alt="logo" style="width:60px;"/>
           </button>
       </form>
+
+    <img src="{{ url_for('static', filename='twitter.jpg') }}" alt="logo" style="width:40px;"/>
+
   </a>
 
   <!-- Links -->
