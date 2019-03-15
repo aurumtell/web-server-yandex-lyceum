@@ -36,6 +36,12 @@ class AddNewsForm(FlaskForm):
     submit = SubmitField('Добавить')
 
 
+@app.route('/account')
+def account():
+    if request.method == 'GET':
+        return render_template('account.html')
+
+
 # @app.route('/add_news', methods=['GET', 'POST'])
 # def add_news():
 #     if 'username' not in session:

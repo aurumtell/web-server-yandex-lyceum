@@ -14,26 +14,38 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="#">
-    <img src="bird.jpg" alt="logo" style="width:40px;">
+      <form method="get" action="/account">
+          <button type="submit" class="btn btn-primary">
+            <img src="{{ url_for('static', filename='twitter.jpg') }}"  alt="logo" style="width:60px;"/>
+          </button>
+      </form>
   </a>
 
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#">Link 1</a>
+      <a class="nav-link" href="#">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link 2</a>
+      <a class="nav-link" href="#">About us</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link 3</a>
+      <a class="nav-link" href="#"></a>
     </li>
   </ul>
     <form class="form-inline" action="/action_page.php">
     <input class="form-control mr-sm-2" type="text" placeholder="Search">
-    <button class="btn btn-success" type="suit ibmit">Search</button>
+    <button class="btn btn-success" type="submit">Search</button>
   </form>
 </nav>
+
+<div class="container-fluid">
+  <h3>Twitter Pro</h3>
+  <p>Read about what you are interested in.
+    Find out what people are discussing.
+    Join the conversation.</p>
+</div>
+
 
 
 <div class="container mt-3">
@@ -66,12 +78,12 @@
 
               <div class="box__input">
                 <input class="box__file" type="file" name="uploadingfiles" id="file" data-multiple-caption="{count} files selected" multiple />
-                <button class="box__button" type="submit">Upload</button>
+                <!--<button class="box__button" type="submit">Upload</button>-->
               </div>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Add</button>
+                <button type="submit" class="btn btn-danger">Add</button>
               </div>
             </div>
           </form>
@@ -83,10 +95,23 @@
 </div>
 
 
-<div class="container-fluid">
-  <h3>Brand / Logo</h3>
-  <p>When using the .navbar-brand class on images, Bootstrap 4 will automatically style the image to fit the navbar.</p>
+
+<div class="container mt-3">
+  <h2 id="title" name="title">Media Object</h2>
+  <div class="media border p-3">
+    <img src="{{ url_for('static', filename='twitter1.jpg') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+    <div class="media-body">
+      <h4>John Doe <small><i>date</i></small></h4>
+      <p id="content" name="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+      <div id="like" name="like">
+        <span class="likebtn-wrapper" data-theme="disk" data-ef_voting="push" data-white_label="true" data-identifier="item_1" data-show_like_label="false" data-dislike_enabled="false" data-icon_dislike_show="false" data-popup_disabled="true"></span>
+        <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+      </div>
+  </div>
 </div>
 
 </body>
 </html>
+
+
