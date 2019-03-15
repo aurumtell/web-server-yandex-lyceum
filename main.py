@@ -48,7 +48,7 @@ def account():
 #         return redirect('/login')
 #     # form = AddNewsForm()
 #
-#     print("got to add_news")
+
 #     if request.method == "POST":
 #         title = request.form["comment"]
 #         content = request.form["uploading_files"]
@@ -74,24 +74,22 @@ def delete_news(news_id):
 def main():
     if 'username' not in session:
         return redirect('/login')
+    nm = NewsModel(db.get_connection())
+    nm.init_table()
     # form = AddNewsForm()
-
-    print("got to add_news")
     if request.method == "POST":
-        print("got here")
         content = request.form["comment"]
         # content = request.files["uploadingfiles"]
-        print("pass here")
-        nm = NewsModel(db.get_connection())
-        nm.init_table()
+
         print(session['username'])
-        nm.insert(content, content, session['username'])  # CHANGE CHANGE to user id
+        nm.insert("заголовок", content, session['username'])  # CHANGE CHANGE to user id
 
         print(nm.get_all())
+
         return redirect("/main")
     else:
-        return render_template('home.html', title='Добавление новости', username=session['username'])
+        return render_template('home.html', title='Добавление новости', username=session['username'], news = nm.get_all())
 
 
 if __name__ == '__main__':
-    app.run(port=8082, host='127.0.0.1')
+    app.run(port=8080, host='127.0.0.1')
