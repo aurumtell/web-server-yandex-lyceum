@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 from flask import Flask, render_template, redirect, request, session
+import time
 # import requests
 import json
 from news_model import *
@@ -76,13 +77,13 @@ def main():
         return redirect('/login')
     nm = NewsModel(db.get_connection())
     nm.init_table()
-    # form = AddNewsForm()
+    # nm.delete_all()
     if request.method == "POST":
         content = request.form["comment"]
         # content = request.files["uploadingfiles"]
 
         print(session['username'])
-        nm.insert("заголовок", content, session['username'])  # CHANGE CHANGE to user id
+        nm.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'])  # CHANGE CHANGE to user id
 
         print(nm.get_all())
 
