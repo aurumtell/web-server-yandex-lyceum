@@ -1,6 +1,6 @@
 
-
 {% extends "base.html" %}
+
 
 {% block content %}
 
@@ -51,7 +51,9 @@
 </div>
 
 
-{% for item in news | reverse %}
+
+{% for item in news | reverse%}
+
     <div class="container mt-3">
 
   <div class="media border p-3">
@@ -71,10 +73,6 @@
       </div>
   </div>
 </div>
-</div>
 {% endfor %}
-
-</body>
-</html>
-
 {% endblock %}
+
