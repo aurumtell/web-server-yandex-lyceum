@@ -99,5 +99,16 @@ def main():
         return render_template('home.html', title='Добавление новости', username=session['username'], news = nm.get_all())
 
 
+@app.route('/user/<nickname>', methods=['GET'])
+def show_users_news(nickname):
+    if 'username' not in session:
+        return redirect('/login')
+    nm = NewsModel(db.get_connection())
+    nm.init_table()
+    if request.method == "GET":
+        return render_template('home.html', title=('All news of' + nickname),
+                               username=session['username'], news=nm.get_all(nickname))
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
