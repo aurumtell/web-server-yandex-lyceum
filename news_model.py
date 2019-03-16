@@ -14,11 +14,11 @@ class NewsModel:
         cursor.close()
         self.connection.commit()
 
-    def insert(self, title, content, user_id):
+    def insert(self, time, content, user_id):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO news 
                           (title, content, user_id) 
-                          VALUES (?,?,?)''', (title, content, str(user_id)))
+                          VALUES (?,?,?)''', (time, content, str(user_id)))
         cursor.close()
         self.connection.commit()
 
@@ -43,5 +43,14 @@ class NewsModel:
     def delete(self, news_id):
         cursor = self.connection.cursor()
         cursor.execute('''DELETE FROM news WHERE id = ?''', (str(news_id),))
+        cursor.close()
+        self.connection.commit()
+
+    def delete_all(self, user_id=None):
+        cursor = self.connection.cursor()
+        if user_id:
+            cursor.execute('''DELETE FROM news WHERE id = ?''', (str(news_id),))
+        else:
+            cursor.execute("DELETE FROM news")
         cursor.close()
         self.connection.commit()

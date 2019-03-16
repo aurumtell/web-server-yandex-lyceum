@@ -101,14 +101,18 @@
 </div>
 
 
-
-<div class="container mt-3">
+{% for item in news %}
+    <div class="container mt-3">
   <h2 id="title" name="title">Media Object</h2>
   <div class="media border p-3">
     <img src="{{ url_for('static', filename='twitter1.jpg') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
     <div class="media-body">
-      <h4>John Doe <small><i>date</i></small></h4>
-      <p id="content" name="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+
+
+
+      <h4>{{item[3]}} <small><i>{{item[1]}}</i></small></h4>
+      <p id="content" name="content">{{item[2]}}</p>
 
     </div>
       <div id="like" name="like">
@@ -117,6 +121,8 @@
       </div>
   </div>
 </div>
+</div>
+{% endfor %}
 
 </body>
 </html>
