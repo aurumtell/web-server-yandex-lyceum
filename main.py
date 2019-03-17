@@ -28,7 +28,7 @@ def login():
             else:
                 return render_template('login.html', title='Wrong email or password')
 
-
+@app.route('/')
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up():
     if request.method == 'GET':
@@ -62,7 +62,7 @@ def my_page():
         em = um.get_email(session['username'])
         uname = session['username']
         return render_template('account.html', username=uname, news=nm.get_all(uname),
-                               email=em)
+                               email=em, own="True")
 
 
 @app.route('/about')
@@ -108,8 +108,12 @@ def show_user(uname):
     um = UsersModel(db.get_connection())
     um.init_table()
     em = um.get_email(session['username'])
+    if um == session['username']:
+        owning = 'True'
+    else:
+        owning = 'False'
     if request.method == "GET":
-        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em)
+        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em, own=owning)
 
 
 if __name__ == '__main__':

@@ -52,7 +52,7 @@
 </form>
 </li>
 </ul>
-<input class="form-control mr-sm-2" type="text" id='label_username' placeholder="Enter Username">
+<input class="form-control" type="text" id='usr' placeholder="Enter Username">
 <button class="btn btn-success" type="submit" id="search_btn">Search</button>
 </form>
 
@@ -73,9 +73,9 @@ Join the conversation.</p>
 </body>
 <script>
     text = document.getElementById('label_username').textContent;
-    console.log(text)
+    log(text)
     document.getElementById("search_btn").onclick = function () {
-    location.href = "user/" + text;
+    location.href = "/user/" + text;
     };
 </script>
 </html>

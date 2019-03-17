@@ -40,8 +40,10 @@
     <img src="{{ url_for('static', filename='twitter1.jpg') }}"  alt="Card Image"  style="width:100%;">
     <div class="card-body">
       <h4 class="card-title">{{username}}</h4>
+      {% if own == "True" %}
       <p class="card-text">{{email}}</p>
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Change image</a>
+      {% endif %}
     </div>
   </div>
   <br>
