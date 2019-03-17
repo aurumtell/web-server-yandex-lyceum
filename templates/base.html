@@ -17,7 +17,7 @@
 <!— Brand/logo —>
 <a class="navbar-brand" href="#">
 
-<form method="get" action="/account">
+<form method="get">
 <button type="submit" class="btn btn-primary">
 <img src="{{ url_for('static', filename='twitter.jpg') }}" alt="logo" style="width:60px;"/>
 </button>
@@ -31,7 +31,7 @@
   <!— Links —>
 <ul class="navbar-nav">
 <li class="nav-item">
-<a class="nav-link" href="#">Home</a>
+<a class="nav-link" href="/main">Home</a>
 </li>
 <li class="nav-item">
 <form method="get" action="/about">
@@ -41,15 +41,25 @@
 <li class="nav-item">
 <a class="nav-link" href="#"></a>
 </li>
-</ul>
-<form class="form-inline" action="/user/<nickname>">
-<input class="form-control mr-sm-2" type="text" placeholder="Enter Username">
-<button class="btn btn-success" type="submit">Search</button>
+<li class="nav-item">
+<form method="get" action="/my_page">
+<a class="nav-link" href="my_page">My page</a>
 </form>
+</li>
+<li class="nav-item">
+<form method="get" action="/logout">
+<a class="nav-link" href="logout">Logout</a>
+</form>
+</li>
+</ul>
+<input class="form-control mr-sm-2" type="text" id='label_username' placeholder="Enter Username">
+<button class="btn btn-success" type="submit" id="search_btn">Search</button>
+</form>
+
 </nav>
 
 <div class="container-fluid">
-<h3>Twitter Pro</h3>
+<h3>My Twitter</h3>
 <p>Read about what you are interested in.
 Find out what people are discussing.
 Join the conversation.</p>
@@ -61,4 +71,11 @@ Join the conversation.</p>
 {% block content %}{% endblock %}
 </main>
 </body>
+<script>
+    text = document.getElementById('label_username').textContent;
+    console.log(text)
+    document.getElementById("search_btn").onclick = function () {
+    location.href = "user/" + text;
+    };
+</script>
 </html>

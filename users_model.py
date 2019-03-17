@@ -29,7 +29,13 @@ class UsersModel:
 
     def get_username(self, email):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT user_name FROM users WHERE email = ?", (str(email), ))
+        cursor.execute("SELECT user_name FROM users WHERE email = ?", (email, ))
+        row = cursor.fetchone()
+        return row[0]
+
+    def get_email(self, username):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT email FROM users WHERE user_name = ?", (username, ))
         row = cursor.fetchone()
         return row[0]
 

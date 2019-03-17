@@ -1,13 +1,12 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired
+# from flask_wtf import FlaskForm
+# from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+# from wtforms.validators import DataRequired
 from flask import Flask, render_template, redirect, request, session
 import time
 # import requests
-import json
-from news_model import *
-from db import *
-from users_model import *
+from news_model import NewsModel
+from db import DB
+from users_model import UsersModel
 
 db = DB()
 app = Flask(__name__)
@@ -30,7 +29,6 @@ def login():
                 return render_template('login.html', title='Wrong email or password')
 
 
-
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up():
     if request.method == 'GET':
@@ -43,7 +41,7 @@ def sign_up():
         print(um.get_all())
         return redirect('/main')
 
-            # return render_template('sign_up', title='Specified account already exists. Log in with it or create new one')
+        # return render_template('sign_up', title='Specified account already exists. Log in with it or create new one')
 
 
 @app.route('/logout')
@@ -52,12 +50,19 @@ def logout():
     return redirect('/login')
 
 
-@app.route('/account')
-def account():
+@app.route('/my_page')
+def my_page():
     if 'username' not in session:
         return redirect('/login')
     if request.method == 'GET':
-        return render_template('account.html', username=session['username'])
+        nm = NewsModel(db.get_connection())
+        nm.init_table()
+        um = UsersModel(db.get_connection())
+        um.init_table()
+        em = um.get_email(session['username'])
+        uname = session['username']
+        return render_template('account.html', username=uname, news=nm.get_all(uname),
+                               email=em)
 
 
 @app.route('/about')
@@ -87,33 +92,24 @@ def main():
         # content = request.files["uploadingfiles"]
 
         print(session['username'])
-        nm.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'])  # CHANGE CHANGE to user id
+        nm.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'])
 
         return redirect("/main")
     else:
         return render_template('home.html', title='Добавление новости', username=session['username'], news=nm.get_all())
 
 
-# @app.route('/user/<nickname>/', methods=['GET'])
-# def show_users_news(nickname):
-#     if 'username' not in session:
-#         return redirect('/login')
-#     nm = NewsModel(db.get_connection())
-#     nm.init_table()
-#     if request.method == "GET":
-#         return render_template('home.html', title=('All news of' + nickname),
-#                                username=session['username'], news=nm.get_all(nickname))
-
-
-@app.route('/user/<nickname>', methods=['GET'])
-def show_users_news(nickname):
+@app.route('/user/<uname>', methods=['GET'])
+def show_user(uname):
     if 'username' not in session:
         return redirect('/login')
     nm = NewsModel(db.get_connection())
     nm.init_table()
+    um = UsersModel(db.get_connection())
+    um.init_table()
+    em = um.get_email(session['username'])
     if request.method == "GET":
-        return render_template('home.html', title=('All news of' + nickname),
-                               username=session['username'], news=nm.get_all(nickname))
+        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em)
 
 
 if __name__ == '__main__':

@@ -1,15 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 30%;
+}
+
+.right {
+  width: 70%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+</body>
+<div class="row">
+  <div class="column left">
 
 <div class="container">
-  <h2>Card Image</h2>
-  <p>Image at the top (card-img-top):</p>
-  <div class="card" style="width:400px">
-    <img src="{{ url_for('static', filename='twitter.jpg') }}"  alt="Card Image"  style="width:100%">
+  <div class="card" style="width:100%">
+    <img src="{{ url_for('static', filename='twitter1.jpg') }}"  alt="Card Image"  style="width:100%;">
     <div class="card-body">
-      <h4 class="card-title">John Doe</h4>
-      <p class="card-text">{{username}}</p>
+      <h4 class="card-title">{{username}}</h4>
+      <p class="card-text">{{email}}</p>
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Change image</a>
     </div>
   </div>
@@ -42,6 +73,33 @@
       </div>
     </div>
   </div>
+</div>
+  </div>
+
+
+<div class="column right" >
+  {% for item in news | reverse %}
+    <div class="container mt-3">
+
+  <div class="media border p-3">
+    <img src="{{ url_for('static', filename='twitter1.jpg') }}" alt={{username}} class="mr-3 mt-3 rounded-circle" style="width:45px;">
+    <div class="media-body">
+
+      <h4>{{item[3]}} <small><i>{{item[1]}}</i></small></h4>
+      <p id="content" name="content">{{item[2]}}</p>
+
+    </div>
+      <div id="like" name="like">
+        <span class="likebtn-wrapper" data-theme="disk" data-ef_voting="push" data-white_label="true" data-identifier="item_1" data-show_like_label="false" data-dislike_enabled="false" data-icon_dislike_show="false" data-popup_disabled="true"></span>
+        <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+      </div>
+  </div>
 
 </div>
+
+{% endfor %}
+</div>
+</div>
+</body>
+
 {% endblock %}
