@@ -1,37 +1,37 @@
 class UsersModel:
-    def __init__(self):
-        conn = sqlite3.connect('news.db', check_same_thread=False)
-        self.connection = conn
+    def __init__(self, connection):
+        self.connection = connection
 
     def get_connection(self):
         return self.connection
 
-    def __del__(self):
-        self.connection.close()
+    # def __del__(self):
+    #     self.connection.close()
 
     def init_table(self):
         cursor = self.connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users 
                             (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                             email VARCHAR(50),
                              user_name VARCHAR(50),
                              password_hash VARCHAR(128)
                              )''')
-        cursor.close()
+        # cursor.close()
         self.connection.commit()
 
-    def insert(self, user_name, password_hash):
+    def insert(self, email, user_name, password_hash):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO users 
-                          (user_name, password_hash) 
-                          VALUES (?,?)''', (user_name, password_hash))
-        cursor.close()
+                          (email, user_name, password_hash) 
+                          VALUES (?,?,?)''''', (email, user_name, password_hash))
+        # cursor.close()
         self.connection.commit()
 
-    def get(self, user_id):
+    def get_username(self, email):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE id = ?", (str(user_id)))
+        cursor.execute("SELECT user_name FROM users WHERE email = ?", (str(email), ))
         row = cursor.fetchone()
-        return row
+        return row[0]
 
     def get_all(self):
         cursor = self.connection.cursor()
@@ -39,9 +39,9 @@ class UsersModel:
         rows = cursor.fetchall()
         return rows
 
-    def exists(self, user_name, password_hash):
+    def exists(self, email, password_hash):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE user_name = ? AND password_hash = ?",
-                       (user_name, password_hash))
+        cursor.execute("SELECT * FROM users WHERE email = ? AND password_hash = ?",
+                       (email, password_hash))
         row = cursor.fetchone()
-        return (True, row[0]) if row else (False,)
+        return True if row else False

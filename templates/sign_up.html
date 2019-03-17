@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+  <h4><span class="glyphicon glyphicon-lock"></span>Sign up</h4>
+  <p>{{title}}</p>
+    <form role="form" method="post">
+    <div class="form-group">
+      <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
+      <input type="email" class="form-control" id="email" name= 'email' placeholder="Enter email">
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="uname">Username:</label>
+      <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+      <label for="pswd"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Check this checkbox to continue.</div>
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
+    <p>Already a member? <button type="button" class="btn btn-default" id="login_btn">Login</button></p>
+</form>
+</div>
+
+</body>
+<script>
+    document.getElementById("login_btn").onclick = function () {
+    location.href = "/login";
+    };
+    <!--document.getElementById("submit_btn").onclick = function () {-->
+    <!--location.href = "/main";-->
+    <!--};-->
+</script>
+</html>
