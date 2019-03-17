@@ -1,4 +1,6 @@
+
 {% extends "base.html" %}
+
 
 {% block content %}
 
@@ -51,7 +53,7 @@
 
 {% for item in news | reverse %}
     <div class="container mt-3">
-  <h2 id="title" name="title">Media Object</h2>
+
   <div class="media border p-3">
     <img src="{{ url_for('static', filename='twitter1.jpg') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
     <div class="media-body">
@@ -67,5 +69,5 @@
   </div>
 </div>
 {% endfor %}
-
 {% endblock %}
+

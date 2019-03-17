@@ -21,12 +21,10 @@ def login():
         elif request.method == 'POST':
             um = UsersModel(db.get_connection())
             um.init_table()
-            print('um created in login')
             print(um.get_all())
             if um.exists(request.form['email'], request.form['pswd']):
                 username = um.get_username(request.form['email'])
                 session['username'] = username
-                print('got here')
                 return redirect('/main')
             else:
                 return render_template('login.html', title='Wrong email or password')
@@ -40,11 +38,9 @@ def sign_up():
     elif request.method == 'POST':
         um = UsersModel(db.get_connection())
         um.init_table()
-        print(um.get_all())
-        print('um created in sign up')
         um.insert(request.form['email'], request.form['uname'], request.form['pswd'])
         session['username'] = request.form['uname']
-        print('if statement')
+        print(um.get_all())
         return redirect('/main')
 
             # return render_template('sign_up', title='Specified account already exists. Log in with it or create new one')
@@ -81,8 +77,8 @@ def delete_news(news_id):
 
 @app.route('/main', methods=['POST', 'GET'])
 def main():
-    # if 'username' not in session:
-    #     return redirect('/login')
+    if 'username' not in session:
+        return redirect('/login')
     nm = NewsModel(db.get_connection())
     nm.init_table()
     # nm.delete_all()
@@ -96,6 +92,17 @@ def main():
         return redirect("/main")
     else:
         return render_template('home.html', title='Добавление новости', username=session['username'], news=nm.get_all())
+
+
+# @app.route('/user/<nickname>/', methods=['GET'])
+# def show_users_news(nickname):
+#     if 'username' not in session:
+#         return redirect('/login')
+#     nm = NewsModel(db.get_connection())
+#     nm.init_table()
+#     if request.method == "GET":
+#         return render_template('home.html', title=('All news of' + nickname),
+#                                username=session['username'], news=nm.get_all(nickname))
 
 
 @app.route('/user/<nickname>', methods=['GET'])
