@@ -14,16 +14,17 @@ class UsersModel:
                             (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                              email VARCHAR(50),
                              user_name VARCHAR(50),
-                             password_hash VARCHAR(128)
+                             password_hash VARCHAR(128),
+                             img VARCHAR(128)
                              )''')
         # cursor.close()
         self.connection.commit()
 
-    def insert(self, email, user_name, password_hash):
+    def insert(self, email, user_name, password_hash, img="twitter1.jpg"):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO users 
-                          (email, user_name, password_hash) 
-                          VALUES (?,?,?)''''', (email, user_name, password_hash))
+                          (email, user_name, password_hash, img) 
+                          VALUES (?,?,?,?)''''''''', (email, user_name, password_hash, img))
         # cursor.close()
         self.connection.commit()
 
@@ -51,3 +52,19 @@ class UsersModel:
                        (email, password_hash))
         row = cursor.fetchone()
         return True if row else False
+
+    def change_avatar(self, uname, img):
+        cursor = self.connection.cursor()
+        cursor.execute('''UPDATE users 
+                            SET img = ?
+                            WHERE user_name = ?;''', (img, uname))
+        # cursor.close()
+        self.connection.commit()
+
+    def get_avatar(self, uname):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE user_name = ?",
+                       (uname, ))
+        row = cursor.fetchone()
+        return row[4]
+

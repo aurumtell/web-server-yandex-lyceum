@@ -37,7 +37,7 @@
 
 <div class="container">
   <div class="card" style="width:100%">
-    <img src="{{ url_for('static', filename='twitter1.jpg') }}"  alt="Card Image"  style="width:100%;">
+    <img src="{{ url_for('static', filename=image)}}"  alt="Card Image"  style="width:100%;">
     <div class="card-body">
       <h4 class="card-title">{{username}}</h4>
       {% if own == "True" %}
@@ -47,6 +47,8 @@
     </div>
   </div>
   <br>
+</div>
+  </div>
 
     <div class="modal fade" id="myModal">
     <div class="modal-dialog">
@@ -54,29 +56,25 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h4 class="modal-title">Upload files</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <!-- Modal body -->
         <div class="modal-body">
-          <div class="box__input">
-                <input class="box__file" type="file" name="uploadingfiles" id="file" data-multiple-caption="{count} files selected" multiple />
-                <!--<button class="box__button" type="submit">Upload</button>-->
-          </div>
+          <form action = "/uploader" method = "POST"
+            enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <input type = "submit"/>
+          </form>
         </div>
 
         <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger">Add</button>
-        </div>
 
       </div>
     </div>
-  </div>
-</div>
-  </div>
+    </div>
+
 
 
 <div class="column right" >
@@ -84,7 +82,7 @@
     <div class="container mt-3">
 
   <div class="media border p-3">
-    <img src="{{ url_for('static', filename='twitter1.jpg') }}" alt={{username}} class="mr-3 mt-3 rounded-circle" style="width:45px;">
+    <img src="{{ url_for('static', filename=image) }}" alt={{username}} class="mr-3 mt-3 rounded-circle" style="width:45px;">
     <div class="media-body">
 
       <h4>{{item[3]}} <small><i>{{item[1]}}</i></small></h4>

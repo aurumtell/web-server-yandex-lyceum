@@ -6,19 +6,20 @@ class NewsModel:
         cursor = self.connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS news 
                                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                                 title VARCHAR(100),
+                                 date VARCHAR(100),
                                  content VARCHAR(1000),
-                                 user_id INTEGER,
-                                 likes INTEGER
+                                 user_name varchar(100),
+                                 likes INTEGER,
+                                 user_avatar varchar (50)
                                  )''')
         cursor.close()
         self.connection.commit()
 
-    def insert(self, time, content, user_id):
+    def insert(self, time, content, uname, avatar):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO news 
-                          (title, content, user_id) 
-                          VALUES (?,?,?)''', (time, content, str(user_id)))
+                          (date, content, user_name, user_avatar) 
+                          VALUES (?,?,?,?)''''', (time, content, uname, avatar))
         cursor.close()
         self.connection.commit()
 
@@ -28,10 +29,10 @@ class NewsModel:
         row = cursor.fetchone()
         return row
 
-    def get_all(self, user_id=None):
+    def get_all(self, username=None):
         cursor = self.connection.cursor()
-        if user_id:
-            cursor.execute("SELECT * FROM news WHERE user_id = ?", (str(user_id),))
+        if username:
+            cursor.execute("SELECT * FROM news WHERE user_name = ?", (username,))
         else:
             cursor.execute("SELECT * FROM news")
         rows = cursor.fetchall()
@@ -49,7 +50,7 @@ class NewsModel:
     def delete_all(self, user_id=None):
         cursor = self.connection.cursor()
         if user_id:
-            cursor.execute('''DELETE FROM news WHERE id = ?''', (str(news_id),))
+            cursor.execute('''DELETE FROM news WHERE id = ?''', (user_id,))
         else:
             cursor.execute("DELETE FROM news")
         cursor.close()

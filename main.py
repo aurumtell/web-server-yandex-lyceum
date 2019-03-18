@@ -7,12 +7,20 @@ import time
 from news_model import NewsModel
 from db import DB
 from users_model import UsersModel
+import os
+from werkzeug.utils import secure_filename
 
 db = DB()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLD = './static'
+UPLOAD_FOLDER = os.path.join(APP_ROOT, UPLOAD_FOLD)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+@app.route('/')
 @app.route('/login', methods=['POST', 'GET'])
 def login():
         if request.method == 'GET':
@@ -28,7 +36,7 @@ def login():
             else:
                 return render_template('login.html', title='Wrong email or password')
 
-@app.route('/')
+
 @app.route('/sign_up', methods=['POST', 'GET'])
 def sign_up():
     if request.method == 'GET':
@@ -61,8 +69,9 @@ def my_page():
         um.init_table()
         em = um.get_email(session['username'])
         uname = session['username']
+        image = um.get_avatar(uname)
         return render_template('account.html', username=uname, news=nm.get_all(uname),
-                               email=em, own="True")
+                               email=em, own="True", image=image)
 
 
 @app.route('/about')
@@ -80,19 +89,33 @@ def delete_news(news_id):
     return redirect("/index")
 
 
+@app.route('/uploader', methods=['GET', 'POST'])
+def change_img():
+    if request.method == 'POST':
+        f = request.files['file']
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], f.filename)
+        f.save(file_path)
+        um = UsersModel(db.get_connection())
+        um.init_table()
+        um.change_avatar(session['username'], f.filename)
+        return redirect('/my_page')
+
+
 @app.route('/main', methods=['POST', 'GET'])
 def main():
     if 'username' not in session:
         return redirect('/login')
     nm = NewsModel(db.get_connection())
     nm.init_table()
+    um = UsersModel(db.get_connection())
+    um.init_table()
     # nm.delete_all()
     if request.method == "POST":
         content = request.form["comment"]
         # content = request.files["uploadingfiles"]
-
-        print(session['username'])
-        nm.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'])
+        avatar = um.get_avatar(session['username'])
+        print(avatar)
+        nm.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'], avatar)
 
         return redirect("/main")
     else:
@@ -108,12 +131,13 @@ def show_user(uname):
     um = UsersModel(db.get_connection())
     um.init_table()
     em = um.get_email(session['username'])
-    if um == session['username']:
+    image = um.get_avatar(uname)
+    if uname == session['username']:
         owning = 'True'
     else:
         owning = 'False'
     if request.method == "GET":
-        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em, own=owning)
+        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em, own=owning, image=image)
 
 
 if __name__ == '__main__':
