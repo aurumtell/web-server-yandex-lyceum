@@ -72,10 +72,10 @@ Join the conversation.</p>
 </main>
 </body>
 <script>
-    text = document.getElementById('label_username').textContent;
+    text = document.getElementById('usr').value;
     log(text)
     document.getElementById("search_btn").onclick = function () {
-    location.href = "/user/" + text;
+    location.href = "/user/" + "${text}";
     };
 </script>
 </html>
