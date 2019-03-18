@@ -51,11 +51,10 @@
 <a class="nav-link" href="logout">Logout</a>
 </form>
 </li>
-</ul>
 <input class="form-control" type="text" id='usr' placeholder="Enter Username">
 <button class="btn btn-success" type="submit" id="search_btn">Search</button>
 </form>
-
+</ul>
 </nav>
 
 <div class="container-fluid">
@@ -72,10 +71,10 @@ Join the conversation.</p>
 </main>
 </body>
 <script>
-    text = document.getElementById('usr').value;
-    log(text)
     document.getElementById("search_btn").onclick = function () {
-    location.href = "/user/" + "${text}";
+    var username = document.getElementById('usr').value;
+
+    location.href = "/user/" + username;
     };
 </script>
 </html>

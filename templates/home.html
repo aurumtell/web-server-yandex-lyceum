@@ -55,11 +55,8 @@
     <div class="container mt-3">
 
   <div class="media border p-3">
-    <img src="{{ url_for('static', filename="twitter1.jpg") }}" alt={{item[3]}} class="mr-3 mt-3 rounded-circle" style="width:60px;">
-      <!--&lt;!&ndash; По идее строчка выше должна выглядеть вот так:-->
-    <!--<img src="{{ url_for('static', filename=item[4]) }}" alt={{username}} class="mr-3 mt-3 rounded-circle" style="width:45px;">-->
-    <!--item[4] это аватарка юзера который оставил новость, я передаю ее в newsmodel в функции main-->
-    <!--однако, если поставить filename=item[4] программа вылетает и поэтому мне нужна помощь &ndash;&gt;-->
+    <img src={{url_for('static', filename = item[5])}} alt={{item[3]}} class="mr-3 mt-3 rounded-circle" style="width:60px;">
+
     <div class="media-body">
 
       <h4>{{item[3]}} <small><i>{{item[1]}}</i></small></h4>

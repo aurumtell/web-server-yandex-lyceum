@@ -116,9 +116,11 @@ def main():
         avatar = um.get_avatar(session['username'])
         print(avatar)
         nm.insert(str(time.asctime(time.localtime(time.time()))), content, session['username'], avatar)
-
+        for i in nm.get_all():
+            check_if_avatar_exists(i)
         return redirect("/main")
     else:
+        print(nm.get_all())
         return render_template('home.html', title='Добавление новости', username=session['username'], news=nm.get_all())
 
 
@@ -137,7 +139,16 @@ def show_user(uname):
     else:
         owning = 'False'
     if request.method == "GET":
-        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em, own=owning, image=image)
+        print(nm.get_all(uname))
+        return render_template('account.html', username=uname, news=nm.get_all(uname), email=em,
+                               own=owning, image=image)
+
+
+def check_if_avatar_exists(item):
+    if item[4]:
+        print(item[4])
+    else:
+        print('f')
 
 
 if __name__ == '__main__':

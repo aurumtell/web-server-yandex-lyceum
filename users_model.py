@@ -63,8 +63,9 @@ class UsersModel:
 
     def get_avatar(self, uname):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE user_name = ?",
+        cursor.execute("SELECT img FROM users WHERE user_name = ?",
                        (uname, ))
         row = cursor.fetchone()
-        return row[4]
-
+        if row:
+            print(row[0])
+        return row[0]

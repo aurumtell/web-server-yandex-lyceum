@@ -9,7 +9,6 @@ class NewsModel:
                                  date VARCHAR(100),
                                  content VARCHAR(1000),
                                  user_name varchar(100),
-                                 likes INTEGER,
                                  user_avatar varchar (50)
                                  )''')
         cursor.close()
@@ -19,7 +18,7 @@ class NewsModel:
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO news 
                           (date, content, user_name, user_avatar) 
-                          VALUES (?,?,?,?)''''', (time, content, uname, avatar))
+                          VALUES (?,?,?,?)''''''''''', (time, content, uname, avatar))
         cursor.close()
         self.connection.commit()
 
